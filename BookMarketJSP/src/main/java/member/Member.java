@@ -9,6 +9,8 @@ public class Member {
 	private String password;
 	private String nickname;
 	private Date regdate;
+	private String mobile;
+	private String email;
 	
 	public Member(int no, String id, String password, String nickname, Date regdate) {
 		this.no = no;
@@ -56,12 +58,32 @@ public class Member {
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
+	
+	public String getMobile() {
+		return mobile;
+	}
 
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 	@Override
 	public String toString() {
 		return "Member [no=" + no + ", id=" + id + ", password=" + password + ", nickname=" + nickname + ", regdate="
 				+ regdate + "]";
 	}
+
+	
+
+	
 	
 	
 }

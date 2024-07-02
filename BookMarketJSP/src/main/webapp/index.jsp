@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>reading is kind of boring honestly</title>
+<title>reading is kinda boring honestly</title>
 
 <style>
 		table {
