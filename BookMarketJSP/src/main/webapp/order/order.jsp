@@ -1,71 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    import = "cart.*"
-    import = "Book.*"
-    import = "book_oracle.*"
     import = "member.*"
     import = "member_oracle.*"
-    import = "java.util.List"
+    import = "cart.*"
     %>
-<%@ include file = "/common/isLoggedIn.jsp" %>
+<%@ include file = "/common/isLoggedIn.jsp" %>    
 <%
-	CartService cartService = new OracleCartService(new OracleCartDAO());
-	BookService bookService = new OracleBookService(new OracleBookDAO());
-	MemberService memberService = new OracleMemberService(new OracleMemberDAO());
 	
-	List<CartItem> itemList = cartService.listAll(memberNo);
+	String mobile = request.getParameter("mobile");
+	String email = request.getParameter("email");
+	String address = request.getParameter("address");
+	
+	if (mobile == null || email == null || address == null) {
+		response.sendRedirect(request.getContextPath() + "common/errorPage.jsp?orderError=1");
+		return;
+	}
+	if (mobile.isEmpty() || email.isEmpty() || address.isEmpty()) {
+		response.sendRedirect("orderPage.jsp");
+		return;
+	} 
+	
+	//회원 정보 수정
+	if (request.getParameter("modifyMember") != null) {	
+		MemberService mservice = new OracleMemberService(new OracleMemberDAO());
+		mservice.editAdditionalInfo(memberNo, mobile, email, address);
+	}
+
+	// Cart에서 주문 아이템 삭제
+	
+	CartService cartService = new OracleCartService(new OracleCartDAO());
+	cartService.clear(memberNo);
 %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>도서 주문</title>
-<style>
-		table {
-			border-collapse : collapse;
-			text-align : center
-		}
-		td {
-			padding : 5px;
-		}
-</style>
+<title>Insert title here</title>
 </head>
 <body>
-  <%@ include file = "/common/header.jsp" %>
-  <h2>주문하기</h2>
-  <h3>주문할 도서 목록</h3>
- 	 <table border = 2>
-			<tr><th>책 번호</th><th>책 제목</th><th>가격</th><th>권수</th></tr>
-			<% 
-			int numItems = 0, totalPrice = 0, i = 0; 
-			 for (CartItem item : itemList) {
-					Book book = bookService.read(item.getBookID());
-					numItems += item.getQuantity();
-					totalPrice += book.getPrice() * item.getQuantity();
-					i++;
-			 %>
-			 <tr>
-				<td> <%= i %> </td>
-				<td> <%= book.getBookname() %> </td>
-				<td> <%= book.getPrice() * item.getQuantity() %> </td>
-				<td> <%= item.getQuantity() %></td>
-			</tr>	
-			 <% } %>
-			 
-		</table>
-		<table border = 3>
-			<tr><th>총 가격</th><th>총 권수</th></tr>
-			<td> <%= totalPrice %> </td>
-			<td> <%= numItems %> </td>
-		</table>
-		<%
-			Member member = memberService.read(memberNo);
-		%>
-		<h4>배송 정보</h4>
-		이름 : <%= member.getNickname() %><br>
-		<form action = "order.jsp" method="post">
-			전화번호 : <input type = "text" value = "<%= member.getMobile() == null ? "" : member.getMobile() %>" placeholder = "010 - xxxx - xxxx"><br>
-			이메일 :  <input type = "text" value = "<%= member.getEmail() == null ? "" : member.getEmail() %>"><br>
-		</form>
+	order.jsp이다
+	<%= request.getParameter("mobile") %>
 </body>
 </html>

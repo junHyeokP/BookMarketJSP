@@ -14,6 +14,8 @@ public interface MemberDAO  {
 	List<Member> selectAllMember();
 
 	int updateMember(Member member);
+	
+	int updateAdditionalInfo(Member member);
 
 	int deleteMember(int no);
 	

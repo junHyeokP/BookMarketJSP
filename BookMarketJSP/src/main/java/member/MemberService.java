@@ -15,4 +15,6 @@ public interface MemberService {
 	public boolean remove(int no);
 	
 	Member login(String id, String pwd);
+	
+	boolean editAdditionalInfo(int no, String mobile, String email, String address);
 }

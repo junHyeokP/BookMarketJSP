@@ -45,6 +45,22 @@ public class OracleMemberService implements MemberService{
 			return result == 1 ? true : false;
 			
 		}
+		
+		@Override
+		public boolean editAdditionalInfo(int no, String mobile, String email, String address) {
+			
+			Member member = new Member();
+			
+			member.setNo(no);
+			member.setMobile(mobile);
+			member.setEmail(email);
+			member.setAddress(address);
+			
+			memberDao.updateAdditionalInfo(member);
+			
+			return false;
+		}
+		
 		public boolean remove(int no) {
 			
 			if (memberDao.SelectMember(no) == null) {
@@ -61,4 +77,6 @@ public class OracleMemberService implements MemberService{
 		public Member login(String id, String pwd) {
 			return memberDao.SelectMember(id, pwd);
 		}
+
+		
 }

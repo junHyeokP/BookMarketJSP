@@ -11,6 +11,9 @@ public class Member {
 	private Date regdate;
 	private String mobile;
 	private String email;
+	private String Address;
+	
+	public Member() {} 
 	
 	public Member(int no, String id, String password, String nickname, Date regdate) {
 		this.no = no;
@@ -28,6 +31,8 @@ public class Member {
 		
 	}
 	
+	
+	
 	public int getNo() {
 		return no;
 	}
@@ -43,8 +48,8 @@ public class Member {
 	public String getPassword() {
 		return password;
 	}
-	public void setPaasword(String paasword) {
-		this.password = paasword;
+	public void setPaasword(String password) {
+		this.password = password;
 	}
 	public String getNickname() {
 		return nickname;
@@ -75,11 +80,21 @@ public class Member {
 		this.email = email;
 	}
 	
+	public String getAddress() {
+		return Address;
+	}
+
+	public void setAddress(String address) {
+		Address = address;
+	}
+	
 	@Override
 	public String toString() {
 		return "Member [no=" + no + ", id=" + id + ", password=" + password + ", nickname=" + nickname + ", regdate="
 				+ regdate + "]";
 	}
+
+	
 
 	
 

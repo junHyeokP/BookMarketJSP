@@ -77,7 +77,7 @@
 <script>
 	function askConfirmOrder() {
 		if(confirm("장바구니의 모든 도서를 주문합니다.")) {
-			location = "<%= request.getContextPath() %>/order/order.jsp"
+			location = "<%= request.getContextPath() %>/order/orderPage.jsp"
 		}
 	}
 	
