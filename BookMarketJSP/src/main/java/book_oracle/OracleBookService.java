@@ -1,13 +1,13 @@
 package book_oracle;
 
-import java.util.List;
+import java.util.List; 
 
 import Book.Book;
 import Book.BookDAO;
 import Book.BookService;
 import cart.CartItem;
 import cart.CartService;
-import cart.OracleCartDAO;
+import cart.HashMapCartDAO;
 import cart.OracleCartService;
 
 public class OracleBookService implements BookService{
@@ -61,7 +61,7 @@ public class OracleBookService implements BookService{
 		
 		if (bookDAO.selectBook(bookID) == null) return false;
 		
-		CartService cartService = new OracleCartService(new OracleCartDAO());
+		CartService cartService = new OracleCartService(HashMapCartDAO.getInstance());
 		List<CartItem> itemList = cartService.readByBookId(bookID);
 		
 		if (itemList.size() > 0) {

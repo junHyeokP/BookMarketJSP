@@ -20,8 +20,8 @@ public class OracleBookDAO implements BookDAO {
 		int result = 0;
 		// sql문 만들기
 				String sql = new StringBuilder()
-						.append("insert into book (bookID, name, author, publisher, price)")
-					    .append("values (book_seq.nextval, ?, ?, ?, ?)") // 물음표는 위에서 받아온 매개변수로 대체됨
+						.append("insert into book (bookID, name, author, publisher, instock, price)")
+					    .append("values (book_seq.nextval, ?, ?, ?, ?, ?)") // 물음표는 위에서 받아온 매개변수로 대체됨
 					    .toString();
 				
 		try {
@@ -34,6 +34,7 @@ public class OracleBookDAO implements BookDAO {
 			jdbc.pstmt.setString(2, book.getAuthor());
 			jdbc.pstmt.setString(3, book.getPublisher());
 			jdbc.pstmt.setInt(4, book.getPrice());
+			jdbc.pstmt.setInt(5, book.getInstock());
 			
 			// SQL문 실행
 			
@@ -69,11 +70,14 @@ public class OracleBookDAO implements BookDAO {
 				jdbc.rs = jdbc.pstmt.executeQuery();
 				
 				if (jdbc.rs.next()) {
-					book = new Book(jdbc.rs.getInt("bookID")
-							,jdbc.rs.getString("name")
+					book = new Book(
+							jdbc.rs.getString("name")
 							,jdbc.rs.getString("author")
 							,jdbc.rs.getString("publisher")
-							,jdbc.rs.getInt("price"));
+							,jdbc.rs.getInt("price")
+							,jdbc.rs.getInt("instock"));
+					book.setBookID(jdbc.rs.getInt("bookID"));
+					book.setRegDate(jdbc.rs.getDate("regdate"));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -105,17 +109,18 @@ public class OracleBookDAO implements BookDAO {
 				System.out.println("<<맴버 상세정보>>");
 				while (jdbc.rs.next()) {
 					Book book = new Book(
-							jdbc.rs.getInt("bookID"),
 							jdbc.rs.getString("name"),
 							jdbc.rs.getString("author"),
 							jdbc.rs.getString("publisher"),
-							jdbc.rs.getInt("price")
-							);
-					bookList.add(book);
-				}
+							jdbc.rs.getInt("price"),
+							jdbc.rs.getInt("instock")
+						);
+						book.setBookID(jdbc.rs.getInt("bookID"));
+						book.setRegDate(jdbc.rs.getDate("regdate"));
+						bookList.add(book);
+					}
 			} catch (SQLException e) {				
 				e.printStackTrace();
-				return null;
 			} finally {
 				jdbc.close();
 			}
@@ -129,10 +134,16 @@ public class OracleBookDAO implements BookDAO {
 			OracleJDBConnection jdbc = new OracleJDBConnection();
 			jdbc.OJDBConnection();
 			
-			String sql = new StringBuilder().append("update book ")
-											.append("set name = ?, author = ?, publisher = ?, price = ? ")
-											.append("where bookID = ?")
-											.toString();
+			String sql = new StringBuilder()
+					.append("update book set ")
+					.append("title=?, ")
+					.append("author=?, ")
+					.append("publisher=?, ")
+					.append("price=?, ")
+					.append("instock=? ")
+					.append("where id=?")
+					.toString();
+			
 			int result = 0;
 			
 			try {

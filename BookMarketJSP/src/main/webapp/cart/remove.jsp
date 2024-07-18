@@ -3,6 +3,8 @@
     pageEncoding="UTF-8"%>
      <%@ include file = "/common/isLoggedIn.jsp" %>
 <%
+	
+
 	String idStr = request.getParameter("id");
 	if (idStr == null || idStr.isEmpty()) {
 			response.sendRedirect(request.getContextPath() + "/common/errorPage.jsp?cartIdErr=1");

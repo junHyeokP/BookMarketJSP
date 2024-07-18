@@ -32,7 +32,7 @@ public class OracleCartService implements CartService{
 	
 	public boolean removeByBookId(int bookId) {
 	
-		int result = cdao.delete(bookId);
+		int result = cdao.deleteByBookId(bookId);
 		return result == 1? true : false;
 	}
 	

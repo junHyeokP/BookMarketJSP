@@ -4,7 +4,10 @@
     <%@ include file = "/common/isLoggedIn.jsp" %>
 <%
 
-	CartService service = new OracleCartService(new OracleCartDAO());
+	//CartService service = new OracleCartService(new OracleCartDAO());
+	//CartService service = new OracleCartService(new HashMapCartDAO());
+	CartService service = new OracleCartService(HashMapCartDAO.getInstance());
+
 
 	String bookIdStr = request.getParameter("bookID");
 	

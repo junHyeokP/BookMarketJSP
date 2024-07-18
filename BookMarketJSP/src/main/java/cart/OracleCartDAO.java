@@ -272,27 +272,8 @@ public class OracleCartDAO implements CartDAO {
 	}
 
 	@Override
-	public int delete(int cartid) {
-		int result = 0;
-		
-		OracleJDBConnection jdbc = new OracleJDBConnection();
-		jdbc.OJDBConnection();
-		
-		String sql = "delete cart where id = ? and member_no = ?";
-		
-		try {
-			jdbc.pstmt = jdbc.conn.prepareStatement(sql);
-			jdbc.pstmt.setInt(1, cartid);
-			
-			result = jdbc.pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			
-			jdbc.close();
-		}
-		
-		return result;
+	public int deleteByBookId(int bookId) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

@@ -102,7 +102,7 @@ public class ListCartDAO implements CartDAO {
 	}
 
 	@Override
-	public int delete(int cartid) {
+	public int deleteByBookId(int bookId) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

@@ -1,5 +1,7 @@
 package Book;
 
+import java.sql.Date;
+
 public class Book {
 	
 	private int bookID;
@@ -7,21 +9,18 @@ public class Book {
 	private String author;
 	private String publisher;
 	private int price;
+	private int instock;
+	private Date regDate;
 	
-	public Book(int bookId, String bookname, String author, String publisher, int price) {
-		this.bookID = bookId;
+	public Book(String bookname, String author, String publisher, int price, int instock) {
 		this.bookname = bookname;
 		this.author = author;
 		this.publisher = publisher;
 		this.price = price;
+		this.instock = instock;
+		
 	}
-	
-	public Book(String bookname, String author, String publisher, int price) {
-		this.bookname = bookname;
-		this.author = author;
-		this.publisher = publisher;
-		this.price = price;
-	}
+
 
 	public int getBookID() {
 		return bookID;
@@ -63,10 +62,29 @@ public class Book {
 		this.price = price;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "Book [bookID=" + bookID + ", bookname=" + bookname + ", author=" + author + ", publisher=" + publisher
-				+ ", price=" + price + "]";
+				+ ", price=" + price + ", instock=" + instock + ", regDate=" + regDate + "]";
+	}
+
+	public int getInstock() {
+		return instock;
+	}
+
+	public void setInstock(int instock) {
+		this.instock = instock;
+	}
+
+
+	public Date getRegDate() {
+		return regDate;
+	}
+
+
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
 	}
 	
 }

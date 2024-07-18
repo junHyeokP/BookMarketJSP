@@ -18,6 +18,6 @@ public interface CartDAO {
 	
 	//D
 	int delete(int cartid, int loggedMemberNo);
-	int delete(int cartid); 
 	int deleteAll(int loggedMemberNo);
+	int deleteByBookId(int bookId);
 }

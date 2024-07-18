@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	import="member.*"
 	import="member_oracle.*"
-    pageEncoding="UTF-8"%>
-    <%@ include file = "/common/isLoggedIn.jsp" %>
+    pageEncoding="UTF-8"
+    %>  
 <%
 	String noStr = request.getParameter("no");
 	if (noStr == null) {
